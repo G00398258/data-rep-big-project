@@ -1,0 +1,51 @@
+create table Employees (
+     ID int NOT NULL,
+     FirstName varchar(50),
+     LastName varchar(50) NOT NULL,
+     JobTitle varchar(255),
+     Department varchar(255) NOT NULL,
+     Salary decimal(8,2),
+     Location varchar(50),
+     ManagerID int NOT NULL,
+     PRIMARY KEY (ID));
+
+create table SurveyResults (
+	ID int NOT NULL,
+	IT_Overall_Score int NOT NULL,
+	Laptop_Score int,
+	Peripherals_Score int,
+	Applications_Score int,
+	Support_Score int,
+	Positive_Feedback varchar(255),
+	Negative_Feedback varchar(255),
+	Follow_Up varchar(3) NOT NULL,
+	PRIMARY KEY (ID));
+
+INSERT INTO Employees
+VALUES (1, 'Michael', 'Dell', 'Chief Financial Officer & Owner', 'Dept. of the CEO', 1000000, 'United States', 1),
+(2, 'Gillian', 'Kane', 'President, Digital', 'Dell Digital', 750000, 'Ireland', 1),
+(3, 'John', 'Doe', 'President, Services', 'Dell Services', 750000, 'Australia', 1),
+(4, 'Mary', 'Joyce', 'President, Logistics ', 'Dell Logistics', 750000, 'Germany', 1),
+(5, 'Robert', 'Friend', 'Director', 'Dell Digital', 500000, 'Scotland', 2),
+(6, 'Ruby', 'McGuire', 'Director', 'Dell Services', 500000, 'United States', 3),
+(7, 'Jason', 'Flash', 'Director', 'Dell Logistics', 500000, 'New Zealeand', 4),
+(8, 'Aaron', 'Paul', 'Manager', 'Dell Digital', 250000, 'United States', 5),
+(9, 'Ellie', 'Boo', 'Principal Software Engineer', 'Dell Digital', 100000, 'England', 5),
+(10, 'David', 'Grey', 'Senior Software Engineer', 'Dell Digital', 75000, 'Canada', 5),
+(11, 'Silvia', 'Italia', 'Software Engineer', 'Dell Digital', 47500, 'Italy', 5),
+(12, 'Eduardo', 'Zorro', 'Software Engineer', 'Dell Digital', 47500, 'Brazil', 5),
+(13, 'Aaron', 'Paul', 'Manager', 'Dell Services', 175000, 'United States', 6),
+(14, 'Amber', 'May', 'Advisor', 'Dell Services', 65000, 'Ireland', 6),
+(15, 'Muskan', 'Ashok', 'Senior Analyst', 'Dell Services', 43750, 'India', 6),
+(16, 'Francois', 'Robin', 'Analyst', 'Dell Services', 35000, 'France', 6),
+(17, 'Emilia', 'Natalia', 'Manager', 'Dell Logistics', 157975, 'Slovakia', 7),
+(18, 'James', 'Bane', 'Procurement Lead', 'Dell Logistics', 98250, 'United States', 7),
+(19, 'Christina', 'Hayes', 'Warehouse Coordinator', 'Dell Logistics', 77000, 'Belgium', 7);
+
+INSERT INTO SurveyResults
+VALUES (14, 7, 3, 7, 5, 6, "The people at the support desk are always very friendly", "My laptop crashes almost every day, no matter what I have open", "Yes"),
+(9, 9, 8, 9, 9, 10, "I love my wireless headset. Also, chatbot has been a great addition to IT support", "Zoom can take a long time to open", "Yes"),
+(16, 1, 1, 3, 2, 5, "The onsite support guys are great, even if everything else is going downhill", "We should have better laptops - we are a computer company after all. Nothing works the way it should e.g. sales apps. I want another monitor for when I work from home but there's no option for me to request one", "No"),
+(7, 8, 7, 7, 7, 8, "MS Teams has made collaborating much easier now that we've all gone remote", "I miss being able to dial out in Skype, Teams doesn't seem to have the same functionality", "Yes");
+
+
