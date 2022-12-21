@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Code I copied from Andrew's repo for easy access
+Andrew's Code/
+
+# DB configuration
+db_config.py
