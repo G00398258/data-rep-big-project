@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, abort
 from survey_DAO import survey_DAO
 
-app = Flask(__name__, static_url_path = '', static_folder = '.')
+app = Flask(__name__, static_url_path = '', static_folder = 'HTML')
 
 #app = Flask(__name__)
 
