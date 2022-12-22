@@ -1,1 +1,196 @@
-Survey page
+<html lang="en">
+    <head>
+        <!-- AJAX JQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+        
+        <!-- https://forum.freecodecamp.org/t/space-between-radio-button-and-the-word/493595 -->
+
+        <style>
+            .radiobtn {
+                margin-left:10px; margin-right:10px;
+            }
+        </style>
+        <title>Survey</title>
+    </head>
+
+    <body>
+        <h2>Please Enter Your Responses Below</h2>
+        <div id="createForm">
+            <input type="hidden" name="id"/>
+            <p>Please enter your Employee ID: <br/>
+            <input type="number" name="employeeID"/></p>
+            <p>On a scale of 1-10, how would you rate your overall IT experience? <br/>
+            <img src="images/scale.png" title = "Score Scale" alt = "Picture: Colour and sentiment scale" hspace="5" width = "470" height="33"> <br/>
+            <input class="radiobtn" type="radio" name="overallIT" value="1">1
+            <input class="radiobtn" type="radio" name="overallIT" value="2">2
+            <input class="radiobtn" type="radio" name="overallIT" value="3">3
+            <input class="radiobtn" type="radio" name="overallIT" value="4">4
+            <input class="radiobtn" type="radio" name="overallIT" value="5">5
+            <input class="radiobtn" type="radio" name="overallIT" value="6">6
+            <input class="radiobtn" type="radio" name="overallIT" value="7">7
+            <input class="radiobtn" type="radio" name="overallIT" value="8">8
+            <input class="radiobtn" type="radio" name="overallIT" value="9">9
+            <input class="radiobtn" type="radio" name="overallIT" value="10">10
+            </p>
+
+            <p>On a scale of 1-10, how satisfied are you with your Dell laptop? <br/>
+            <img src="images/scale.png" title = "Score Scale" alt = "Picture: Colour and sentiment scale" hspace="5" width = "470" height="33"> <br/>
+            <input class="radiobtn" type="radio" name="laptop" value="1">1
+            <input class="radiobtn" type="radio" name="laptop" value="2">2
+            <input class="radiobtn" type="radio" name="laptop" value="3">3
+            <input class="radiobtn" type="radio" name="laptop" value="4">4
+            <input class="radiobtn" type="radio" name="laptop" value="5">5
+            <input class="radiobtn" type="radio" name="laptop" value="6">6
+            <input class="radiobtn" type="radio" name="laptop" value="7">7
+            <input class="radiobtn" type="radio" name="laptop" value="8">8
+            <input class="radiobtn" type="radio" name="laptop" value="9">9
+            <input class="radiobtn" type="radio" name="laptop" value="10">10
+            </p>
+        
+            <p>On a scale of 1-10, how would you rate your Dell issued accessories and peripherals (monitors, headsets, keyboards, etc.)? <br/>
+            <img src="images/scale.png" title = "Score Scale" alt = "Picture: Colour and sentiment scale" hspace="5" width = "470" height="33"> <br/>
+            <input class="radiobtn" type="radio" name="accessories" value="1">1
+            <input class="radiobtn" type="radio" name="accessories" value="2">2
+            <input class="radiobtn" type="radio" name="accessories" value="3">3
+            <input class="radiobtn" type="radio" name="accessories" value="4">4
+            <input class="radiobtn" type="radio" name="accessories" value="5">5
+            <input class="radiobtn" type="radio" name="accessories" value="6">6
+            <input class="radiobtn" type="radio" name="accessories" value="7">7
+            <input class="radiobtn" type="radio" name="accessories" value="8">8
+            <input class="radiobtn" type="radio" name="accessories" value="9">9
+            <input class="radiobtn" type="radio" name="accessories" value="10">10
+            </p>
+
+            <p>On a scale of 1-10, how would you rate the applications you use for your role? <br/>
+            <img src="images/scale.png" title = "Score Scale" alt = "Picture: Colour and sentiment scale" hspace="5" width = "470" height="33"> <br/>
+        
+            <input class="radiobtn" type="radio" name="apps" value="1">1
+            <input class="radiobtn" type="radio" name="apps" value="2">2
+            <input class="radiobtn" type="radio" name="apps" value="3">3
+            <input class="radiobtn" type="radio" name="apps" value="4">4
+            <input class="radiobtn" type="radio" name="apps" value="5">5
+            <input class="radiobtn" type="radio" name="apps" value="6">6
+            <input class="radiobtn" type="radio" name="apps" value="7">7
+            <input class="radiobtn" type="radio" name="apps" value="8">8
+            <input class="radiobtn" type="radio" name="apps" value="9">9
+            <input class="radiobtn" type="radio" name="apps" value="10">10
+            </p>
+    
+            <p>On a scale of 1-10, how would you rate the IT Support available to you (via phone, chat, service desk and onsite)? <br/>
+            <img src="images/scale.png" title = "Score Scale" alt = "Picture: Colour and sentiment scale" hspace="5" width = "470" height="33"> <br/>
+            
+            <input class="radiobtn" type="radio" name="support" value="1">1
+            <input class="radiobtn" type="radio" name="support" value="2">2
+            <input class="radiobtn" type="radio" name="support" value="3">3
+            <input class="radiobtn" type="radio" name="support" value="4">4
+            <input class="radiobtn" type="radio" name="support" value="5">5
+            <input class="radiobtn" type="radio" name="support" value="6">6
+            <input class="radiobtn" type="radio" name="support" value="7">7
+            <input class="radiobtn" type="radio" name="support" value="8">8
+            <input class="radiobtn" type="radio" name="support" value="9">9
+            <input class="radiobtn" type="radio" name="support" value="10">10
+            </p>
+            
+            <p>What's going well? Please enter any positive feedback you have to share <br/>
+            <textarea name="posFeedback" rows="6" cols="70">
+                </textarea> </p>
+            
+            <p>
+            What could be improved? Please enter any negative feedback you have to share <br/>
+            <textarea name="negFeedback" rows="6" cols="70">
+                </textarea> </p>
+            
+            <p>Finally, do you consent to having your contact information shared with stakeholders for follow up post survey? <br/>
+                <input class="radiobtn" type="radio" name="followUp" value="yes">Yes
+                <input class="radiobtn" type="radio" name="followUp" value="no">No
+            </p>
+        </div>
+            <br/>
+            <span><button id="doCreateButton" onclick="doCreate()">Submit</button></span>
+            <br/>
+    </body>
+
+    <script>
+        function doCreate(){
+        var form = document.getElementById('createForm')
+
+        var record = {}
+       
+        record.EmployeeID = form.querySelector('input[name="employeeID"]').value
+        
+        //code below adapted from: https://www.geeksforgeeks.org/how-to-get-value-of-selected-radio-button-using-javascript/
+        var ele = document.getElementsByName('overallIT');
+        for(i = 0; i < ele.length; i++) {
+            if(ele[i].checked)
+                record.IT_Overall_Score = ele[i].value;}
+        var ele = document.getElementsByName('laptop');
+        for(i = 0; i < ele.length; i++) {
+            if(ele[i].checked)
+                record.Laptop_Score = ele[i].value;}
+        var ele = document.getElementsByName('accessories');
+        for(i = 0; i < ele.length; i++) {
+            if(ele[i].checked)
+                record.Accessories_Score = ele[i].value;}
+        var ele = document.getElementsByName('apps');
+        for(i = 0; i < ele.length; i++) {
+            if(ele[i].checked)
+                record.Applications_Score = ele[i].value;}
+        var ele = document.getElementsByName('support');
+        for(i = 0; i < ele.length; i++) {
+            if(ele[i].checked)
+                record.Support_Score = ele[i].value;}
+        
+        record.Positive_Feedback = form.querySelector('textarea[name="posFeedback"]').value
+        record.Negative_Feedback = form.querySelector('textarea[name="negFeedback"]').value
+        
+        var ele = document.getElementsByName('followUp');
+        for(i = 0; i < ele.length; i++) {
+            if(ele[i].checked)
+                record.Follow_Up = ele[i].value;}
+
+        console.log(JSON.stringify(record))
+        createRecordAjax(record)
+        
+        /*
+        record.Laptop_Score = form.querySelector('input[name="laptop"]').value
+        record.Accessories_Score = form.querySelector('input[name="accessories"]').value
+        record.Applications_Score = form.querySelector('input[name="apps"]').value
+        record.Support_Score = form.querySelector('input[name="support"]').value
+        record.Positive_Feedback = form.querySelector('input[name="posFeedback"]').value
+        record.Negative_Feedback = form.querySelector('input[name="negFeedback"]').value
+        record.Follow_Up = form.querySelector('input[name="followUp"]').value
+        console.log(JSON.stringify(record))
+        createRecordAjax(record)
+        */
+    }
+    function createRecordAjax(record){
+        console.log(JSON.stringify(record));
+        $.ajax({
+            "url": "http://127.0.0.1:5000/survey",
+            "method":"POST",
+            "data":JSON.stringify(record),
+            "dataType": "JSON",
+            contentType: "application/json; charset=utf-8",
+            "success":function(result){
+                //console.log(result);
+                record.id = result.id
+                window.location.href = "thankyou.html";
+                //addBookToTable(book)
+                //clearForm()
+                //showViewAll()
+            },
+            "error":function(xhr,status,error){
+                console.log("error: "+status+" msg:"+error);
+            }
+        });
+
+    }
+
+
+    </script>
+
+</html>
