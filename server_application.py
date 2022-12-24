@@ -58,9 +58,10 @@ def update(id):
         abort(404)
     
     if not request.json:
-        abort(400)
+        abort(401)
     reqJson = request.json
 
+    '''
     # Error checking to prevent non-ints being entered in Employee ID & score columns
     if 'EmployeeID' in reqJson and type(reqJson['EmployeeID']) is not int:
         abort(400)
@@ -74,6 +75,7 @@ def update(id):
         abort(400)
     if 'Support_Score' in reqJson and type(reqJson['Support_Score']) is not int:
         abort(400)
+    '''
     
     if 'EmployeeID' in reqJson:
         foundRecord['EmployeeID'] = reqJson['EmployeeID']

@@ -116,22 +116,34 @@
                 <input class="radiobtn" type="radio" name="followUp" value="no">No
             </p>
     
-            <span><button id="doCreateButton" onclick="doCreate()">Submit</button></span>
+            <button id="doCreateUpdateButton" onclick="doCreateUpdate()">Submit</button>
             <br/>
         </div>
 
         <div id="thankyou" style="display:none">
             <h1> Thank you for taking the time to complete the IT Pulse Survey!</h1>
             <!-- Resposnse ID will be entered in here by the DOM -->
-            <h2 id="responseID"></h2>
+            <h3 id="responseID"></h3>
             <p> To view the current survey results, please click the button below.</p>
             <br>
             <button id="showResultsButton" onclick="showResults()">View Results</button>
             <br>
-            <p>To review, edit or delete your response, please click the button below.</p>
+            <p>To review, update or delete your response, please click the button below.</p>
             <br>
-            <button id="editDeleteButton" onclick="showEditDelete()">View Your Response</button>
+            <button id="updateDeleteButton" onclick="showUpdateDelete()">View Your Response</button>
             <br>
+        </div>
+
+        <div id="updateDelete" style="display:none">
+            <h1 id="heading">Update / Delete Survey Response</h1>
+            <p>Please enter your Response ID: <br/>
+                <input type="number" name="responseID"></p>
+                <br/>
+                <button id="retrieveButton" onclick="retrieveRecord()">View Survey Responses</button>
+                
+            </table>
+            <br/>
+
         </div>
 
         <div id="results" style="display:none">
@@ -151,35 +163,19 @@
             </table>
             <br/>
 
-
         </div>
 
-        <div id="editDelete" style="display:none">
-            <h1 id="heading">Update / Delete Survey Response</h1>
-            <p>Please enter your Response ID: <br/>
-                <input type="number" name="rID"></p>
-                <br/>
-                <button id="retrieveButton" onclick="retrieveRecord()">View Survey Responses</button>
-
-
-            <table class="table" id="editDeleteTable" style="display:none">
-                <tr>
-                        <th>Response ID</th>
-                        <th>Overall IT</th>
-                        <th>Laptops</th>
-                        <th>Accessories</th>
-                        <th>Applications</th>
-                        <th>Support</th>
-                        <th>Positive Feedback</th>
-                        <th>Negative Feedback</th>
-                        <th>Follow Up</th>
-                </tr>
-                
-            </table>
+        <div id="updateDeleteButtons" style="display:none">
+            <!-- Employee ID will be inserted here-->
+            <h5 id="empID"></h5>
             <br/>
-            
-
+            <button id="updateButton" onclick="updateRecord()">Update Response</button>
+            <button id="deleteButton" onclick="warningMsg()">Delete Response</button>
+            <br/>
+            <p><h3 id="warning msg" style="display:none">WARNING: You are about to delete your response</h3></p>
+            <button id="confirmButton" style="display:none" onclick="deleteRecord()">Confirm Delete</button>
         </div>
+        
 
 
     </body>
@@ -191,46 +187,54 @@
             document.getElementById('createForm').style.display="inline-block";
         }
 
-        function doCreate(){
-        var form = document.getElementById('createForm')
+        function doCreateUpdate(){
+            var form = document.getElementById('createForm')
 
-        var record = {}
-       
-        record.EmployeeID = form.querySelector('input[name="employeeID"]').value
+            var record = {}
         
-        //code below adapted from: https://www.geeksforgeeks.org/how-to-get-value-of-selected-radio-button-using-javascript/
-        var ele = document.getElementsByName('overallIT');
-        for(i = 0; i < ele.length; i++) {
-            if(ele[i].checked)
-                record.IT_Overall_Score = ele[i].value;}
-        var ele = document.getElementsByName('laptop');
-        for(i = 0; i < ele.length; i++) {
-            if(ele[i].checked)
-                record.Laptop_Score = ele[i].value;}
-        var ele = document.getElementsByName('accessories');
-        for(i = 0; i < ele.length; i++) {
-            if(ele[i].checked)
-                record.Accessories_Score = ele[i].value;}
-        var ele = document.getElementsByName('apps');
-        for(i = 0; i < ele.length; i++) {
-            if(ele[i].checked)
-                record.Applications_Score = ele[i].value;}
-        var ele = document.getElementsByName('support');
-        for(i = 0; i < ele.length; i++) {
-            if(ele[i].checked)
-                record.Support_Score = ele[i].value;}
-        
-        record.Positive_Feedback = form.querySelector('textarea[name="posFeedback"]').value
-        record.Negative_Feedback = form.querySelector('textarea[name="negFeedback"]').value
-        
-        var ele = document.getElementsByName('followUp');
-        for(i = 0; i < ele.length; i++) {
-            if(ele[i].checked)
-                record.Follow_Up = ele[i].value;}
+            record.EmployeeID = form.querySelector('input[name="employeeID"]').value
+            
+            //code below adapted from: https://www.geeksforgeeks.org/how-to-get-value-of-selected-radio-button-using-javascript/
+            var ele = document.getElementsByName('overallIT');
+            for(i = 0; i < ele.length; i++) {
+                if(ele[i].checked)
+                    record.IT_Overall_Score = ele[i].value;}
+            var ele = document.getElementsByName('laptop');
+            for(i = 0; i < ele.length; i++) {
+                if(ele[i].checked)
+                    record.Laptop_Score = ele[i].value;}
+            var ele = document.getElementsByName('accessories');
+            for(i = 0; i < ele.length; i++) {
+                if(ele[i].checked)
+                    record.Accessories_Score = ele[i].value;}
+            var ele = document.getElementsByName('apps');
+            for(i = 0; i < ele.length; i++) {
+                if(ele[i].checked)
+                    record.Applications_Score = ele[i].value;}
+            var ele = document.getElementsByName('support');
+            for(i = 0; i < ele.length; i++) {
+                if(ele[i].checked)
+                    record.Support_Score = ele[i].value;}
+            
+            record.Positive_Feedback = form.querySelector('textarea[name="posFeedback"]').value
+            record.Negative_Feedback = form.querySelector('textarea[name="negFeedback"]').value
+            
+            var ele = document.getElementsByName('followUp');
+            for(i = 0; i < ele.length; i++) {
+                if(ele[i].checked)
+                    record.Follow_Up = ele[i].value;}
 
-        console.log(JSON.stringify(record))
-        createRecordAjax(record)
-    }
+            console.log(JSON.stringify(record))
+
+            //if employee ID field is disabled, then we're doing an update, not a create
+            //https://bobbyhadz.com/blog/javascript-check-if-element-is-disabled
+            if (form.querySelector('input[name="employeeID"]').disabled) {
+                updateRecordAjax(record);
+            } else {
+                createRecordAjax(record);
+            }
+        }
+        
 
     function createRecordAjax(record){
         console.log(JSON.stringify(record));
@@ -307,36 +311,93 @@
             cell9.innerHTML = record.Follow_Up
 
     }
-    function showEditDelete(){
+    function showUpdateDelete(){
         document.getElementById('thankyou').style.display="none";
-        document.getElementById('editDelete').style.display="inline-block";
+        document.getElementById('updateDelete').style.display="inline-block";
     }
 
     function retrieveRecord(){
-        document.getElementById('editDeleteTable').style.display="inline-block";
-        var rID = document.getElementsByName('rID').value;
-        getRecordAjax(rID);
+        //document.getElementById('updateDeleteTable').style.display="inline-block";
+        var form = document.getElementById('updateDelete')
+        responseID = form.querySelector('input[name="responseID"]').value
+        console.log(responseID)
+        getRecordAjax(responseID);
 
     }
 
-    function getRecordAjax(rID){
+    function getRecordAjax(responseID){
         $.ajax({
-            "url": "http://127.0.0.1:5000/survey/"+rID,
+            "url": "http://127.0.0.1:5000/survey/"+responseID,
             "method":"GET",
             "data":"",
             "dataType": "JSON",
             "success":function(result){
-                //console.log(result);
-                for (record of result){
-                    addRecordToTable(record);
-                }
+                console.log(result);
+                document.getElementById('results').style.display="inline-block";
+                addRecordToTable(result);
+                document.getElementById('updateDeleteButtons').style.display="inline-block";
+                document.getElementById('empID').innerHTML="Employee ID: "+result.EmployeeID+" (this cannot be amended)";
+                },
                 
-            },
             "error":function(xhr,status,error){
                 console.log("error: "+status+" msg:"+error);
+                console.log(url)
             }
         });
 
+    }
+
+    function updateRecord(){
+        document.getElementById('results').style.display="none";
+        document.getElementById('updateDelete').style.display="none";
+        document.getElementById('updateDeleteButtons').style.display="none";
+        document.getElementById('createForm').style.display="inline-block";
+
+        //clearing the results table and form
+        var tableElement = document.getElementById('resultsTable')
+        tableElement.deleteRow(-1);
+        clearFormForUpdate()
+    }
+
+    function clearFormForUpdate(){
+        var form = document.getElementById('createForm')
+        //not allowing users to change their employee ID
+        form.querySelector('input[name="employeeID"]').disabled = true
+
+        // https://bobbyhadz.com/blog/javascript-set-radio-to-checked-unchecked
+        document.getElementsByName('overallIT').checked=false;
+        document.getElementsByName('laptop').checked=false;
+        document.getElementsByName('accessories').checked=false;
+        document.getElementsByName('apps').checked=false;
+        document.getElementsByName('support').checked=false;   
+        document.getElementsByName('followUp').checked=false;
+
+        form.querySelector('textarea[name="posFeedback"]').value=''
+        form.querySelector('textarea[name="negFeedback"]').value=''
+        
+        
+    }
+
+    function updateRecordAjax(record){
+        console.log(JSON.stringify(record));
+        $.ajax({
+            "url": "http://127.0.0.1:5000/survey/"+responseID,
+            "method":"PUT",
+            "data":JSON.stringify(record),
+            "dataType": "JSON",
+            contentType: "application/json; charset=utf-8",
+            "success":function(result){
+                // console.log(result);
+                document.getElementById('createForm').style.display="none";
+                document.getElementById('thankyou').style.display="inline-block";
+                document.getElementById('responseID').innerHTML="Your Response ID is "+responseID+" - please take note of this ID in case you need to amend your survey response";
+                  
+            },
+            "error":function(xhr,status,error){
+                console.log("error: "+status+" msg:"+error);
+                console.log(responseID);
+            }
+        });
     }
     
 
