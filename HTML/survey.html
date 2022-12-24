@@ -23,6 +23,10 @@
             <p>In our efforts to improve your overall IT experience, we are taking a quick survey to understand what is working well and what could be improved in the IT space.</p>
             <p>To begin, please click the Take Survey button below.<p>
             <button id="showSurveyButton" onclick="showCreate()">Take Survey</button>
+            <br>
+            <p> To view the current survey results, please click the button below.</p>
+            <button id="showResultsButton" onclick="showResults()">View Results</button>
+            <br>
         </div>
 
         <div id="createForm" style="display:none">
@@ -112,8 +116,8 @@
                 </textarea> </p>
             
             <p>Finally, do you consent to having your contact information shared with stakeholders for follow up post survey? <br/>
-                <input class="radiobtn" type="radio" name="followUp" value="yes">Yes
-                <input class="radiobtn" type="radio" name="followUp" value="no">No
+                <input class="radiobtn" type="radio" name="followUp" value="Yes">Yes
+                <input class="radiobtn" type="radio" name="followUp" value="No">No
             </p>
     
             <button id="doCreateUpdateButton" onclick="doCreateUpdate()">Submit</button>
@@ -121,8 +125,8 @@
         </div>
 
         <div id="thankyou" style="display:none">
-            <h1> Thank you for taking the time to complete the IT Pulse Survey!</h1>
-            <!-- Resposnse ID will be entered in here by the DOM -->
+            <h1> Thank you for completing the IT Pulse Survey!</h1>
+            <!-- Response ID will be entered in here by the DOM -->
             <h3 id="responseID"></h3>
             <p> To view the current survey results, please click the button below.</p>
             <br>
@@ -130,12 +134,12 @@
             <br>
             <p>To review, update or delete your response, please click the button below.</p>
             <br>
-            <button id="updateDeleteButton" onclick="showUpdateDelete()">View Your Response</button>
+            <button id="updateDeleteButton" onclick="showUpdateDelete()">Review Your Response</button>
             <br>
         </div>
 
         <div id="updateDelete" style="display:none">
-            <h1 id="heading">Update / Delete Survey Response</h1>
+            <h1 id="heading">Review Survey Response</h1>
             <p>Please enter your Response ID: <br/>
                 <input type="number" name="responseID"></p>
                 <br/>
@@ -147,8 +151,10 @@
         </div>
 
         <div id="results" style="display:none">
+            <br>
+            <h1>Current Survey Results</h1>
             <table class="table" id="resultsTable">
-                <tr>
+                <thead>
                         <th>Response ID</th>
                         <th>Overall IT</th>
                         <th>Laptops</th>
@@ -158,7 +164,7 @@
                         <th>Positive Feedback</th>
                         <th>Negative Feedback</th>
                         <th>Follow Up</th>
-                </tr>
+                </thead>
                 
             </table>
             <br/>
@@ -170,10 +176,17 @@
             <h5 id="empID"></h5>
             <br/>
             <button id="updateButton" onclick="updateRecord()">Update Response</button>
-            <button id="deleteButton" onclick="warningMsg()">Delete Response</button>
+            <button id="deleteButton" onclick="warnUser()">Delete Response</button>
             <br/>
-            <p><h3 id="warning msg" style="display:none">WARNING: You are about to delete your response</h3></p>
+            <p><h3 id="warnUser" style="display:none">WARNING: You are about to delete your response</h3></p>
             <button id="confirmButton" style="display:none" onclick="deleteRecord()">Confirm Delete</button>
+        </div>
+
+        <divi id="deleted" style="display:none">
+            <h3>Response has been deleted</h3>
+            <p> To view the current survey results, please click the button below.</p>
+            <button id="showResultsButton" onclick="showResults()">View Results</button>
+            <br>
         </div>
         
 
@@ -185,6 +198,7 @@
         function showCreate(){
             document.getElementById('welcome').style.display="none";
             document.getElementById('createForm').style.display="inline-block";
+            document.getElementById('results').style.display="none";
         }
 
         function doCreateUpdate(){
@@ -249,7 +263,7 @@
                 record.id = result.ResponseID
                 document.getElementById('createForm').style.display="none";
                 document.getElementById('thankyou').style.display="inline-block";
-                document.getElementById('responseID').innerHTML="Your Response ID is "+record.id+" - please take note of this ID in case you need to amend your survey response";
+                document.getElementById('responseID').innerHTML="Your Response ID is "+record.id+" - please take note of this ID in case you need to amend your survey response below.\nNote that responses cannot be amended once you leave this page";
                 //window.location.href = "thankyou.html";
                 //addRecordToTable(record)
                 //clearForm()
@@ -263,10 +277,40 @@
 
         function showResults(){
             document.getElementById('thankyou').style.display="none";
+            document.getElementById('deleted').style.display="none";
             document.getElementById('results').style.display="inline-block";
+            //document.getElementById("showResultsButton").innerHTML='<button onclick="hideResults()">Hide Results</button>';
             getAllAjax()
         }
-        
+
+        /*
+        function hideResults(){
+            // clearing & resetting the table
+            var table = document.getElementById('resultsTable');
+            table.remove();
+            var newTable = document.getElementById('results');
+            newTable.innerHTML='<br>\
+            <h1>Current Survey Results</h1>\
+            <table class="table" id="resultsTable">\
+                <thead>\
+                        <th>Response ID</th>\
+                        <th>Overall IT</th>\
+                        <th>Laptops</th>\
+                        <th>Accessories</th>\
+                        <th>Applications</th>\
+                        <th>Support</th>\
+                        <th>Positive Feedback</th>\
+                        <th>Negative Feedback</th>\
+                        <th>Follow Up</th>\
+                </thead>\
+            </table>'
+
+            document.getElementById("showResultsButton").innerHTML='<button onclick="showResults()">View Results</button>';
+
+            
+        }
+        */
+
         function getAllAjax(){
         $.ajax({
             "url": "http://127.0.0.1:5000/survey",
@@ -323,6 +367,34 @@
         console.log(responseID)
         getRecordAjax(responseID);
 
+    }
+
+    function deleteRecord(){
+        var form = document.getElementById('updateDelete')
+        responseID = form.querySelector('input[name="responseID"]').value
+        console.log(responseID)
+        deleteRecordAjax(responseID);
+    }   
+
+    function deleteRecordAjax(responseID){
+        $.ajax({
+            "url": "http://127.0.0.1:5000/survey/"+responseID,
+            "method":"DELETE",
+            "data":"",
+            "dataType": "JSON",
+            contentType: "application/json; charset=utf-8",
+            "success":function(result){
+                //console.log(result);
+                var tableElement = document.getElementById('resultsTable')
+                tableElement.deleteRow(-1);
+                document.getElementById('deleted').style.display="inline-block";
+                document.getElementById('updateDelete').style.display="none";
+                document.getElementById('updateDeleteButtons').style.display="none";
+            },
+            "error":function(xhr,status,error){
+                console.log("error: "+status+" msg:"+error);
+            }
+        });
     }
 
     function getRecordAjax(responseID){
@@ -398,6 +470,11 @@
                 console.log(responseID);
             }
         });
+    }
+
+    function warnUser(){
+        document.getElementById('warnUser').style.display="inline-block";
+        document.getElementById('confirmButton').style.display="inline-block";
     }
     
 
