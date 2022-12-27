@@ -49,13 +49,10 @@
             <button id="showSurveyButton" onclick="showCreate()">Take Survey</button>
             <br>
             <p> To view the current survey results or statistics, please click the relevant button below.</p>
-        </div>
-
-        <div id="resultsStatsButtons" style="display:inline-block">
-            <p><button id="showResultsButton" onclick="showResults()">View Results</button>
-            <button id="showStatsButton" onclick="showStatistics()">View Statistics</button></p>
-                <br>
-            
+            <button id="showResultsButton" onclick="showResults()">View Results</button>
+            <button id="showStatsButton" onclick="showStatistics()">View Statistics</button>
+            <br>
+            <br>
         </div>
 
         <div id="createForm" style="display:none">
@@ -156,7 +153,7 @@
         <div id="thankyou" style="display:none">
             <h1>Thank you for completing the IT Pulse Survey!</h1>
             <!-- Response ID and a message will be entered in here by the DOM -->
-            <p id="respID"></p>
+            <p id="responseID"></p>
             <p> To view the current survey results or statistics, please click the relevant button below.</p>
             <br>
             <button id="showResultsButton" onclick="showResults()">View Results</button>
@@ -171,13 +168,20 @@
         <div id="updateDelete" style="display:none">
             <h1 id="heading">Review Survey Response</h1>
             <p>Please enter your Response ID: <br>
-                <input type="number" name="respID"></p>
+                <input type="number" name="responseID"></p>
                 <br>
                 <button id="retrieveButton" onclick="retrieveRecord()">View Survey Responses</button>
                 
             </table>
             <br>
 
+        </div>
+
+        <div id="resultsStatsButtons" style="display:none">
+            <button id="showResultsButton" onclick="showResults()">View Results</button>
+                <button id="showStatsButton" onclick="showStatistics()">View Statistics</button>
+                <br>
+            
         </div>
 
         <div id="results" style="display:none">
@@ -350,8 +354,7 @@
                 record.id = result.ResponseID
                 document.getElementById('createForm').style.display="none";
                 document.getElementById('thankyou').style.display="inline-block";
-                document.getElementById('resultsStatsButtons').style.display="none";
-                document.getElementById('respID').innerHTML="<h3>Your Response ID is "+record.id+".</h3><p><h5>Please take note of this ID in case you need to amend your survey response below.</h5></p><h5>Note that responses cannot be amended once you leave this page.</h5><br>";
+                document.getElementById('responseID').innerHTML="<h3>Your Response ID is "+record.id+".</h3><p><h5>Please take note of this ID in case you need to amend your survey response below.</h5></p><h5>Note that responses cannot be amended once you leave this page.</h5><br>";
             },
             "error":function(xhr,status,error){
                 console.log("error: "+status+" msg:"+error);
@@ -363,7 +366,6 @@
             document.getElementById('thankyou').style.display="none";
             document.getElementById('deleted').style.display="none";
             document.getElementById('surveyStats').style.display="none";
-            document.getElementById('createForm').style.display="none";
             document.getElementById('resultsStatsButtons').style.display="inline-block";
             document.getElementById('results').style.display="inline-block";
            
@@ -418,30 +420,29 @@
     }
     function showUpdateDelete(){
         document.getElementById('thankyou').style.display="none";
-        document.getElementById('resultsStatsButtons').style.display="none";
         document.getElementById('updateDelete').style.display="inline-block";
     }
 
     function retrieveRecord(){
         //document.getElementById('updateDeleteTable').style.display="inline-block";
         var form = document.getElementById('updateDelete')
-        respID = form.querySelector('input[name="respID"]').value
-        console.log(respID)
+        responseID = form.querySelector('input[name="responseID"]').value
+        console.log(responseID)
         resetTables();
-        getRecordAjax(respID);
+        getRecordAjax(responseID);
 
     }
 
     function deleteRecord(){
         var form = document.getElementById('updateDelete')
-        respID = form.querySelector('input[name="respID"]').value
-        console.log(respID)
-        deleteRecordAjax(respID);
+        responseID = form.querySelector('input[name="responseID"]').value
+        console.log(responseID)
+        deleteRecordAjax(responseID);
     }   
 
-    function deleteRecordAjax(respID){
+    function deleteRecordAjax(responseID){
         $.ajax({
-            "url": "http://127.0.0.1:5000/survey/"+respID,
+            "url": "http://127.0.0.1:5000/survey/"+responseID,
             "method":"DELETE",
             "data":"",
             "dataType": "JSON",
@@ -460,9 +461,9 @@
         });
     }
 
-    function getRecordAjax(respID){
+    function getRecordAjax(responseID){
         $.ajax({
-            "url": "http://127.0.0.1:5000/survey/"+respID,
+            "url": "http://127.0.0.1:5000/survey/"+responseID,
             "method":"GET",
             "data":"",
             "dataType": "JSON",
@@ -551,7 +552,7 @@
     function updateRecordAjax(record){
         console.log(JSON.stringify(record));
         $.ajax({
-            "url": "http://127.0.0.1:5000/survey/"+respID,
+            "url": "http://127.0.0.1:5000/survey/"+responseID,
             "method":"PUT",
             "data":JSON.stringify(record),
             "dataType": "JSON",
@@ -560,12 +561,12 @@
                 // console.log(result);
                 document.getElementById('createForm').style.display="none";
                 document.getElementById('thankyou').style.display="inline-block";
-                document.getElementById('respID').innerHTML="<h3>Your Response ID is "+respID+".</h3><p><h5>Please take note of this ID in case you need to amend your survey response below.</h5></p><h5>Note that responses cannot be amended once you leave this page.</h5><br>";
+                document.getElementById('responseID').innerHTML="<h3>Your Response ID is "+record.id+".</h3><p><h5>Please take note of this ID in case you need to amend your survey response below.</h5></p><h5>Note that responses cannot be amended once you leave this page.</h5><br>";
                   
             },
             "error":function(xhr,status,error){
                 console.log("error: "+status+" msg:"+error);
-                console.log(respID);
+                console.log(responseID);
             }
         });
     }
@@ -576,11 +577,7 @@
     }
 
     function showStatistics(){
-        document.getElementById('thankyou').style.display="none";
-        document.getElementById('deleted').style.display="none";
-        document.getElementById('createForm').style.display="none";
         document.getElementById('results').style.display="none";
-        document.getElementById('resultsStatsButtons').style.display="inline-block";
         document.getElementById('surveyStats').style.display="inline-block";
         resetTables();
         getStatsAjax();

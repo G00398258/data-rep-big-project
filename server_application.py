@@ -110,6 +110,13 @@ def delete(id):
     survey_DAO.delete(id)
     return jsonify({"done":True})
 
+#curl "http://127.0.0.1:5000/survey/stats"
+@app.route('/survey/stats')
+def getStats():
+    #print("in getall")
+    results = survey_DAO.get_survey_stats()
+    return jsonify(results)
+
 
 if __name__ == '__main__' :
     app.run(debug= True)
