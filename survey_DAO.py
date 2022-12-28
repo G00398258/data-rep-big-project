@@ -263,7 +263,8 @@ class Survey_DAO:
         (16, 'Francois', 'Robin', 'Analyst', 'Dell Services', 35000, 'France', 6),\
         (17, 'Emilia', 'Natalia', 'Manager', 'Dell Logistics', 157975, 'Slovakia', 7),\
         (18, 'James', 'Bane', 'Procurement Lead', 'Dell Logistics', 98250, 'United States', 7),\
-        (19, 'Christina', 'Hayes', 'Warehouse Coordinator', 'Dell Logistics', 77000, 'Belgium', 7);"
+        (19, 'Christina', 'Hayes', 'Warehouse Coordinator', 'Dell Logistics', 77000, 'Belgium', 7),\
+        (20, 'Andrew', 'Beatty', 'IT Specialist', 'Dell Digital', 100000, 'Ireland', 5);"
         cursor.execute(sql)
         self.connection.commit()
 
@@ -311,7 +312,8 @@ class Survey_DAO:
         (16,'Latitude Basic',30),\
         (17,'Inspiron 221',11),\
         (18,'Precision 5560',17),\
-        (19,'Precision 5560',17);"
+        (19,'Precision 5560',17),\
+        (20, 'Latitude Premium',8));"
         cursor.execute(sql)
         self.connection.commit()
         
@@ -321,5 +323,5 @@ survey_DAO = Survey_DAO()
 
 if __name__ == '__main__' :
     #survey_DAO.create_database()
-    #survey_DAO.create_tables()
+    survey_DAO.create_tables()
     print("Hello from surveyDAO")

@@ -133,3 +133,7 @@ Andrew's Code/
 
 # DB configuration
 db_config.py
+
+# Other files not required on github
+colourscale.xlsx
+my_sql_setup.txt
