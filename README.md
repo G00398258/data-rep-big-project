@@ -24,7 +24,7 @@ Please bare in mind that this is not the finished product. I would have liked to
 <br>
 ### Note on Interacting with the API  
 ***  
-When you opt to take the survey, please note that EmployeeID (the first input box) must be a number between 1 & 20 (as I got tired of making up employee data after doing 20. I will have over 100,000 available to me at work when I connect this API to our SQL database!).
+When you opt to take the survey, please note that EmployeeID (the first input box) must be a number between 1 & 20 (as I got tired of making up employee data after doing 20. I will have over 100,000 available to me at work when I connect this API to our SQL database).  
 <br>
 Andrew - I made you a Dell employee for this exercise with EmployeeID 20. Please feel free to use this!  
 <br>
@@ -58,12 +58,12 @@ To Run on Python Anywhere:
 - requirements.txt  
 - server_application.py  
 - survey_DAO.py  
-<br>
+<br>  
 ### Software Information  
 ***  
 The back end code for this project was written in Python (version 3.8.8) and compiled in Visual Studio Code (version 1.74.0). The HTML, CSS & Javascript used in the front end user interface was also compiled in Visual Studio Code.  
-<br>
+<br>  
 Please see file requirements.txt for information on the Python modules used in this project.  
-<br>
+<br>  
 ## End  
 ***
