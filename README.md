@@ -18,7 +18,8 @@ I work for a team in Dell, whose primary function is to run and then analyse the
 We currently use a third party survey tool to host the survey, which requires us to manually export the results and import them into our SQL database, but recently my manager and I have been talking about ways in which we could host the survey ourselves to simplify the process. With this project, and using the lecturer's examples as my base code, I decided to build a basic API for that purpose to see what it might look like and how it would work.  
 <br>
 Upon loading the interface, the user will be invited to take a survey. They can also view the current survey results (minus Employee IDs, as these would be private) and statistics around the survey results, including the average scores as they stand, responses by departments, the laptop models belonging to users who are providing negative laptop scores and employee information for users who consent to sharing their contact information for further follow up post survey (this is the last question they answer in the survey). 
-<br>  Aftewards, the user has a chance to amend their responses or delete them, but once they leave this page they cannot do so again (nor can they delete or alter responses from other employees). The user can then see the updated results and statistics again if they wish, or they can choose to exit. I have entered a handful of dummy responses in the DB so there is something to show if you decide to view the results/stats before taking the survey.  
+<br>  
+Aftewards, the user has a chance to amend their responses or delete them, but once they leave this page they cannot do so again (nor can they delete or alter responses from other employees). The user can then see the updated results and statistics again if they wish, or they can choose to exit. I have entered a handful of dummy responses in the DB so there is something to show if you decide to view the results/stats before taking the survey.  
 <br>
 Please bare in mind that this is not the finished product. I would have liked to have done more with the survey results (e.g. export results to csv files, create word clouds and do some natural language processing on the text box responses) and do some authentication (e.g. confirm EmployeeID exists in the DB, limit how many times an employee can take the survey in a certain time frame, etc.) but due to time constraints I had to settle for a more basic API. I will continue to work on adding additional functionality to this API with a view to putting it forward to be considered by my manager as a possible solution to our survey hosting issues.  
 <br>
@@ -42,6 +43,7 @@ To Run Locally:
 - Open your browser and go to http://127.0.0.1:5000/ to confirm the server is running  
 - You can then go to http://127.0.0.1:5000/survey.html to interact with the API  
 <br>
+
 To Run on Python Anywhere:  
 - In your browser, go to http://g00398258.pythonanywhere.com/survey.html  
 <br>
