@@ -3,11 +3,11 @@ from survey_DAO import survey_DAO
 
 app = Flask(__name__, static_url_path = '', static_folder = 'HTML')
 
-#app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return "Server running"
+    return "Server is running - go to http://127.0.0.1:5000/survey.html to begin"
+
 
 #curl "http://127.0.0.1:5000/survey"
 @app.route('/survey')
@@ -16,12 +16,14 @@ def getAll():
     results = survey_DAO.getAll()
     return jsonify(results)
 
+
 #curl "http://127.0.0.1:5000/survey/2"
 @app.route('/survey/<int:id>')
 def findByResponseID(id):
     foundRecord = survey_DAO.findByResponseID(id)
 
     return jsonify(foundRecord)
+
 
 #curl  -i -H "Content-Type:application/json" -X POST http://127.0.0.1:5000/survey -d "{\"EmployeeID\":16,\"IT_Overall_Score\":6,\"Laptop_Score\":4,\"Accessories_Score\":5,\"Applications_Score\":3, \"Support_Score\":7, \"Positive_Feedback\":\"IT support agents are very helpful\", \"Negative_Feedback\":\"Theres too much bloatware on our laptops. Mine can barely function with only a handful of apps open. Our accessories e.g. headsets should be wireless by default. Also, SFDC is a pain, theres always an outage\", \"Follow_Up\":\"No\"}"
 #curl  -i -H "Content-Type:application/json" -X POST http://127.0.0.1:5000/survey -d "{\"EmployeeID\":1,\"IT_Overall_Score\":10,\"Laptop_Score\":10,\"Accessories_Score\":10,\"Applications_Score\":9, \"Support_Score\":10, \"Positive_Feedback\":\"Everything is great\", \"Negative_Feedback\":\"Nothing to report!\", \"Follow_Up\":\"Yes\"}" 
@@ -30,7 +32,7 @@ def create():
     
     if not request.json:
         abort(400)
-    # other checking 
+        
     survey_response = {
         "EmployeeID": request.json['EmployeeID'],
         "IT_Overall_Score": request.json['IT_Overall_Score'],
@@ -60,22 +62,6 @@ def update(id):
     if not request.json:
         abort(401)
     reqJson = request.json
-
-    '''
-    # Error checking to prevent non-ints being entered in Employee ID & score columns
-    if 'EmployeeID' in reqJson and type(reqJson['EmployeeID']) is not int:
-        abort(400)
-    if 'IT_Overall_Score' in reqJson and type(reqJson['IT_Overall_Score']) is not int:
-        abort(400)
-    if 'Laptop_Score' in reqJson and type(reqJson['Laptop_Score']) is not int:
-        abort(400)
-    if 'Accessories_Score' in reqJson and type(reqJson['Accessories_Score']) is not int:
-        abort(400)
-    if 'Applications_Score' in reqJson and type(reqJson['Applications_Score']) is not int:
-        abort(400)
-    if 'Support_Score' in reqJson and type(reqJson['Support_Score']) is not int:
-        abort(400)
-    '''
     
     if 'EmployeeID' in reqJson:
         foundRecord['EmployeeID'] = reqJson['EmployeeID']
@@ -104,16 +90,17 @@ def update(id):
     survey_DAO.update(values)
     return jsonify(foundRecord)
         
+
 # curl -X DELETE http://127.0.0.1:5000/survey/6
 @app.route('/survey/<int:id>' , methods=['DELETE'])
 def delete(id):
     survey_DAO.delete(id)
     return jsonify({"done":True})
 
+
 #curl "http://127.0.0.1:5000/survey/stats"
 @app.route('/survey/stats')
 def getStats():
-    #print("in getall")
     results = survey_DAO.get_survey_stats()
     return jsonify(results)
 

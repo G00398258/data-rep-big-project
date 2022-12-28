@@ -26,18 +26,12 @@
                 padding: 20;
                 color: white
             }
-            /*
-            tr:nth-child(odd) {
-            background-color: #AEB6BF; 
-            color:white;
-            }
-            */
             tr:hover {
                 background-color: #A9CCE3;
             }
 
         </style>
-        <title>Survey</title>
+        <title>IT Pulse Survey</title>
     </head>
 
     <body>
@@ -45,7 +39,7 @@
             <h1> IT Pulse Survey </h1>
             <h4> Welcome to the IT Pulse Survey!</h4>
             <p>In our efforts to improve your overall IT experience, we are taking a quick survey to understand what is working well and what could be improved in the IT space.</p>
-            <p>To begin, please click the Take Survey button below.<p>
+            <p>To begin, please click the <b>Take Survey</b> button below.<p>
             <button id="showSurveyButton" onclick="showCreate()">Take Survey</button>
             <br>
             <p> To view the current survey results or statistics, please click the relevant button below.</p>
@@ -54,7 +48,9 @@
         <div id="resultsStatsButtons" style="display:inline-block">
             <p><button id="showResultsButton" onclick="showResults()">View Results</button>
             <button id="showStatsButton" onclick="showStatistics()">View Statistics</button></p>
-                <br>
+            <br>
+            <p><a href="goodbye.html">Exit</a></p>
+            <br>
             
         </div>
 
@@ -149,8 +145,9 @@
                 <input class="radiobtn" type="radio" name="followUp" value="No">No
             </p>
     
-            <button id="doCreateUpdateButton" onclick="doCreateUpdate()">Submit</button>
+            <p><button id="doCreateUpdateButton" onclick="doCreateUpdate()">Submit</button></p>
             <br>
+            <p><a href="goodbye.html">Exit</a></p>
         </div>
 
         <div id="thankyou" style="display:none">
@@ -159,12 +156,14 @@
             <p id="respID"></p>
             <p> To view the current survey results or statistics, please click the relevant button below.</p>
             <br>
-            <button id="showResultsButton" onclick="showResults()">View Results</button>
-            <button id="showStatsButton" onclick="showStatistics()">View Statistics</button>
+            <p><button id="showResultsButton" onclick="showResults()">View Results</button>
+            <button id="showStatsButton" onclick="showStatistics()">View Statistics</button></p>
             <br>
             <p>To review, update or delete your response, please click the button below.</p>
             <br>
-            <button id="updateDeleteButton" onclick="showUpdateDelete()">Review Your Response</button>
+            <p><button id="updateDeleteButton" onclick="showUpdateDelete()">Review Your Response</button></p>
+            <br>
+            <p><a href="goodbye.html">Exit</a></p>
             <br>
         </div>
 
@@ -173,7 +172,7 @@
             <p>Please enter your Response ID: <br>
                 <input type="number" name="respID"></p>
                 <br>
-                <button id="retrieveButton" onclick="retrieveRecord()">View Survey Responses</button>
+                <button id="retrieveButton" onclick="retrieveRecord()">View Survey Response</button>
                 
             </table>
             <br>
@@ -209,6 +208,9 @@
             <br>
             <p><h3 id="warnUser" style="display:none">WARNING: You are about to delete your response</h3></p>
             <button id="confirmButton" style="display:none" onclick="deleteRecord()">Confirm Delete</button>
+            <br>
+            <p><a href="goodbye.html">Exit</a></p>
+            <br>
         </div>
 
         <div id="deleted" style="display:none">
@@ -287,6 +289,8 @@
             document.getElementById('createForm').style.display="inline-block";
             document.getElementById('results').style.display="none";
             document.getElementById('surveyStats').style.display="none";
+            document.getElementById('resultsStatsButtons').style.display="none";
+
 
         }
 
