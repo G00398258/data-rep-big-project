@@ -13,6 +13,7 @@ http://g00398258.pythonanywhere.com/survey.html
 <br>
   
 ### Background Information  
+***  
 I work for a team in Dell, whose primary function is to run and then analyse the results of a quarterly survey called the IT Pulse. We present the results of this survey to product managers, engineers and designers, and use it to gauge team member sentiment around the IT products available to them through a scoring system.  
 <br>
 We currently use a third party survey tool to host the survey, which requires us to manually export the results and import them into our SQL database, but recently my manager and I have been talking about ways in which we could host the survey ourselves to simplify the process. With this project, and using the lecturer's examples as my base code, I decided to build a basic API for that purpose to see what it might look like and how it would work.  
