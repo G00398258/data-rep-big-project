@@ -37,7 +37,7 @@ To Run Locally:
 - Use the example structure in the dbconfig_template.py file to make a new file called db_config.py (name must be exact)  
 - Fill in the relevant host, user, password and database information as per your setup on the db_config.py file  
 - On the command line, run 'python survey_DAO.py' to create the required SQL tables and (optionally) database  
-	- NOTE: please check lines 325 & 326 of survey_DAO.py in case these lines have been commented out before running  
+	- NOTE: please check lines 326 & 327 of survey_DAO.py in case these lines have been commented out before running  
 	- The message 'Hello from surveyDAO' will be printed to the console upon successful execution  
 - Back on the command line, run 'python server_application.py' to start the server  
 	- If any errors are encountered, run 'pip install -r requirements.txt' and retry the above command  

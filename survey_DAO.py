@@ -1,4 +1,4 @@
-# database setup and queries
+# database setup and queries - # main reference point for this code was the lecture's book & getlippy examples
 
 import mysql.connector
 import db_config as cfg
@@ -91,7 +91,6 @@ class Survey_DAO:
         values = (id,)
 
         cursor.execute(sql, values)
-
         self.connection.commit()
         self.closeAll()
         

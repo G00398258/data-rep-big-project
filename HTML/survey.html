@@ -1,3 +1,4 @@
+<!-- front end web interface - main reference point for this code was the lecture's book & getlippy examples -->
 <html lang="en">
     <head>
         <!-- AJAX JQuery -->
@@ -54,6 +55,7 @@
             
         </div>
 
+        <!-- actual survey section -->
         <div id="createForm" style="display:none">
             <h1>Please Enter Your Survey Responses Below</h1>
             <input type="hidden" name="id"/>
@@ -220,7 +222,8 @@
             <button id="showStatsButton" onclick="showStatistics()">View Statistics</button>
             <br>
         </div>
-        
+
+        <!-- stats section - four different tables will be populated with data from the DB in here -->
         <div id="surveyStats" style="display:none">
             <h1>Survey Statistics</h1>
             <!-- Number of survey responses will be inserted here -->
@@ -646,7 +649,6 @@
         
         function addDeptResponsesToTable(record){
             // departments table
-            //if (("Dept_Responses" in record)==true)
             
                 var table = document.getElementById('deptsTable')
                 var rowElement = table.insertRow(-1)
@@ -658,7 +660,6 @@
 
         function addLaptopResponsesToTable(record){
             // laptops table
-            //if (("Negative_Scores" in record)==true)
             
                 var table = document.getElementById('laptopsTable')
                 var rowElement = table.insertRow(-1)
@@ -671,7 +672,6 @@
 
         function addFollowUpInfoToTable(record){
             // follow up (employee info) table
-        //if (("Email" in record)==true)
             
                 var table = document.getElementById('fupTable')
                 var rowElement = table.insertRow(-1)
@@ -707,8 +707,6 @@
                 cell15.innerHTML = record.SupportScore
             }
         
-    
-
 
     </script>
 

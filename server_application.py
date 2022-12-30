@@ -1,4 +1,5 @@
 # server routing, all tested and confirmed to be working with curl
+# main reference point for this code was the lecture's book & getlippy examples
 
 from flask import Flask, jsonify, request, abort
 from survey_DAO import survey_DAO
