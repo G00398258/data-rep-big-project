@@ -1,3 +1,5 @@
+# database setup and queries
+
 import mysql.connector
 import db_config as cfg
 
